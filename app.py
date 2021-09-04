@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 import cv2 as cv
 import os
 import random
@@ -6,6 +7,7 @@ from image import *
 from waitress import serve
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png']
