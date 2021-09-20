@@ -22,13 +22,17 @@ def hello_world():
 @app.route('/tanks', methods=['POST'])
 def upload_files():
     uploaded_file = request.files['file']
+    uploaded_wind = request.values['wind']
     num = random.randint(0, 10000000)
     uploaded_file.save(f"images/{num}.png")
     img = cv.imread(f"images/{num}.png")
     img = cv.resize(img, (750, 1334))
     u, x, y = get_dist(img)
-    wind = get_wind_val(img)
-    result = compute(x, y, 8.7)
+    if uploaded_wind:
+        wind = int(uploaded_wind)
+    else:
+        wind = get_wind_val(img)
+    result = compute(x, y, wind)
     power = set_power(wind)
     os.remove(f"images/{num}.png")
     return (f"u:{u} x:{x} y:{y} wind:{wind} angle:{result} power:{power}")
@@ -36,5 +40,6 @@ def upload_files():
 
 if __name__ == '__main__':
     # app.run()
-    serve(app, host='0.0.0.0', port=os.environ.get('PORT', 5000))
     print(f"App listening on port:{os.environ.get('PORT', 5000)}")
+    serve(app, host='0.0.0.0', port=os.environ.get('PORT', 5000))
+    print("Shutting down")
