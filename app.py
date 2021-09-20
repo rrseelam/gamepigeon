@@ -29,7 +29,10 @@ def upload_files():
     img = cv.resize(img, (750, 1334))
     u, x, y = get_dist(img)
     if uploaded_wind:
-        wind = int(uploaded_wind)
+        try:
+            wind = int(uploaded_wind)
+        except ValueError:
+            wind = get_wind_val(img)
     else:
         wind = get_wind_val(img)
     result = compute(x, y, wind)

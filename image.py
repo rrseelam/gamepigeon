@@ -47,8 +47,8 @@ def find_red(img):
     c = 0
     x, y = 0, 0
     arr = np.array(img[500:1200, :, :])
-    for i in range(arr.shape[0]):
-        for j in range(arr.shape[1]):
+    for i in range(0, arr.shape[0], 2):
+        for j in range(0, arr.shape[1], 2):
             if arr[i, j, 2] < 50 and arr[i, j, 0] > 100 and arr[i, j, 1] > 100:
                 c += 1
                 y += i
@@ -61,8 +61,8 @@ def find_blue(img):
     c = 0
     x, y = 0, 0
     arr = np.array(img[500:1200, :, :])
-    for i in range(arr.shape[0]):
-        for j in range(arr.shape[1]):
+    for i in range(0, arr.shape[0], 2):
+        for j in range(0, arr.shape[1], 2):
             if arr[i, j, 0] < 50 and arr[i, j, 1] > 50 and arr[i, j, 2] > 50:
                 c += 1
                 y += i
