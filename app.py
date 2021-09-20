@@ -30,7 +30,7 @@ def upload_files():
     u, x, y = get_dist(img)
     if uploaded_wind:
         try:
-            wind = int(uploaded_wind)
+            wind = float(uploaded_wind)
         except ValueError:
             wind = get_wind_val(img)
     else:
